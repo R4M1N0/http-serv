@@ -1,4 +1,6 @@
 package de.reqbal.httpserv.http;
 
-public record HttpRequest(HttpMethod method, String uri) {
+import java.util.List;
+
+public record HttpRequest(HttpMethod method, String uri, List<HttpHeader> header, String body) {
 }

@@ -21,7 +21,7 @@ public class HttpRequestParseGateway {
       }
       case ONE_ONE -> {
         //TODO: implement
-        return null;
+        return http10RequestParser.parse(requestLine, in);
       }
       case TWO_ZERO -> {
         //TODO: implement

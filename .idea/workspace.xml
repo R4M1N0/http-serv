@@ -4,32 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b623dfa-8f97-44e8-af55-a18cdb2cb3cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/HttpServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/conn/ConnectionCommunicator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/conn/ConnectionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/Http10RequestParser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpCode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpConnectionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpMethod.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpRequestParseGateway.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpResponseSerializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpVersion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpVersionResolver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/route/Route.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/de/reqbal/httpserv/AppTest.java" afterDir="false" />
+    <list default="true" id="2b623dfa-8f97-44e8-af55-a18cdb2cb3cb" name="Changes" comment="HttpServ Initial Commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpHeader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpParsingConstants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpStaticResourceLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/exception/HttpRequestInputException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/resource/HttpBodySerializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/resource/HttpResource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/route/RouteContainer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/www/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/HttpServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/HttpServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/conn/ConnectionCommunicator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/conn/ConnectionCommunicator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/Http10RequestParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/Http10RequestParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpConnectionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpRequestParseGateway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpRequestParseGateway.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpResponseSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpResponseSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpTimeoutException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/exception/HttpTimeoutException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpVersionResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpVersionResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/route/Route.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/route/Route.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,9 +37,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
         <option value="Record" />
+        <option value="Interface" />
+        <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -51,9 +51,12 @@
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2i3VxD9FM8DqgEaPkGrxZXaEv3h" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -62,8 +65,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.App.executor": "Run",
+    "Application.App.executor": "Debug",
+    "DefaultHtmlFileTemplate": "HTML File",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "Maven.http-serv [clean,install].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -83,6 +88,10 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="de.reqbal.httpserv.http.HttpParsingConstants" />
+      <recent name="HttpParsingConstants" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="de.reqbal.httpserv" />
     </key>
@@ -123,20 +132,35 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1718719493606</updated>
-      <workItem from="1718719494662" duration="7003000" />
+      <workItem from="1718719494662" duration="7923000" />
+      <workItem from="1718788728627" duration="1069000" />
+      <workItem from="1718807139977" duration="6600000" />
     </task>
+    <task id="LOCAL-00001" summary="HttpServ Initial Commit">
+      <option name="closed" value="true" />
+      <created>1718731495914</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1718731495914</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="HttpServ Initial Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="HttpServ Initial Commit" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpConnectionHandler.java</url>
-          <line>39</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/src/main/java/de/reqbal/httpserv/http/HttpStaticResourceLoader.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

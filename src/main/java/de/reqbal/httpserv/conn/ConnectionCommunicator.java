@@ -1,7 +1,7 @@
 package de.reqbal.httpserv.conn;
 
 import de.reqbal.httpserv.http.HttpConnectionHandler;
-import de.reqbal.httpserv.http.HttpTimeoutException;
+import de.reqbal.httpserv.http.exception.HttpTimeoutException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
