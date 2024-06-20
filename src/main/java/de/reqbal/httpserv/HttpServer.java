@@ -3,7 +3,7 @@ package de.reqbal.httpserv;
 import de.reqbal.httpserv.conn.ConnectionCommunicator;
 import de.reqbal.httpserv.conn.ConnectionHandler;
 import de.reqbal.httpserv.http.HttpConnectionHandler;
-import de.reqbal.httpserv.http.HttpRequestParseGateway;
+import de.reqbal.httpserv.http.request.HttpRequestParseGateway;
 import de.reqbal.httpserv.http.HttpStaticResourceLoader;
 import de.reqbal.httpserv.route.Route;
 import de.reqbal.httpserv.route.RouteContainer;

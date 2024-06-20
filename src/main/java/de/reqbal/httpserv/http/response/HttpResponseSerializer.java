@@ -1,8 +1,10 @@
-package de.reqbal.httpserv.http;
+package de.reqbal.httpserv.http.response;
 
+import de.reqbal.httpserv.http.model.HttpVersion;
 import de.reqbal.httpserv.http.resource.HttpBodySerializer;
+import de.reqbal.httpserv.http.resource.HttpResource;
 import java.nio.charset.StandardCharsets;
-import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
 
 public class HttpResponseSerializer {
 
@@ -27,20 +29,25 @@ public class HttpResponseSerializer {
   }
 
   private String appendBody(HttpResponse httpResponse, String response) {
-    Object body = httpResponse.body();
-    if (null != body) {
-      response += new String(httpBodySerializer.serialize(body), StandardCharsets.UTF_8);
+    HttpResource resource = httpResponse.body();
+    if (resource == null) {
+      return response;
+    }
+
+    Object body = resource.value();
+    byte[] bodyBytes = httpBodySerializer.serialize(body);
+    if (null != bodyBytes) {
+      response += new String(bodyBytes, StandardCharsets.UTF_8);
       response += NEW_LINE;
     }
     return response;
   }
 
   private static String appendHeaders(HttpResponse httpResponse, String response) {
-    response += "Date:" + SINGLE_SPACE + DateTimeFormatter.RFC_1123_DATE_TIME.format(httpResponse.date());
-    response += NEW_LINE;
-    response += "Server:" + SINGLE_SPACE + httpResponse.server();
-    response += NEW_LINE;
-    response += "Content-Type:" + SINGLE_SPACE + "text/html";
+    var headers = httpResponse.header();
+    var resDiff = headers.stream().map(header -> header.key() + ":" + SINGLE_SPACE + header.value())
+        .collect(Collectors.joining(NEW_LINE));
+    response += resDiff;
     return response;
   }
 }

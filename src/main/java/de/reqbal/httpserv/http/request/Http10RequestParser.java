@@ -1,27 +1,39 @@
-package de.reqbal.httpserv.http;
+package de.reqbal.httpserv.http.request;
 
-import static de.reqbal.httpserv.http.HttpResponseSerializer.SINGLE_SPACE;
+import static de.reqbal.httpserv.http.response.HttpResponseSerializer.SINGLE_SPACE;
 
+import de.reqbal.httpserv.http.model.HttpHeader;
+import de.reqbal.httpserv.http.model.HttpMethod;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class Http10RequestParser {
 
   public HttpRequest parse(String requestLine, BufferedReader remaining) throws IOException {
     MethodPath result = getMethodPath(requestLine);
     List<HttpHeader> headers = getHttpHeaders(remaining);
-    String body = getBody(remaining);
+    var contentLength = Optional.ofNullable(HttpHeader.getContentLength(headers)).map(Integer::parseInt).orElse(null);
+    String body = getBody(remaining, contentLength);
     return new HttpRequest(result.method(), result.uri(), headers, body);
   }
 
-  private static String getBody(BufferedReader remaining) throws IOException {
+  private static String getBody(BufferedReader remaining, Integer contentLength) throws IOException {
+
+    if (contentLength == null) {
+      return null;
+    }
+
     StringBuilder body = new StringBuilder();
     while (remaining.ready()) {
-      var nextLine = remaining.readLine();
-      body.append(nextLine);
+      char[] cBody = new char[contentLength];
+      //will only read until cBody is full
+      remaining.read(cBody);
+      //TODO: How to handle timeout
+      body.append(cBody);
     }
     return body.toString();
   }
@@ -30,7 +42,7 @@ public class Http10RequestParser {
     List<HttpHeader> headers = new ArrayList<>();
     while (remaining.ready()) {
       var nextLine = remaining.readLine();
-      if (nextLine.equals(HttpParsingConstants.CRLF)) {
+      if (nextLine.isBlank()) {
         break;
       }
       var headerParts = nextLine.split(":");

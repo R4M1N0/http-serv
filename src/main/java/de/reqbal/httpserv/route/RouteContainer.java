@@ -1,7 +1,6 @@
 package de.reqbal.httpserv.route;
 
-import de.reqbal.httpserv.http.HttpMethod;
-import de.reqbal.httpserv.http.HttpResponse;
+import de.reqbal.httpserv.http.model.HttpMethod;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

@@ -1,5 +1,6 @@
 package de.reqbal.httpserv.http;
 
+import de.reqbal.httpserv.http.model.HttpVersion;
 import java.util.Arrays;
 
 public class HttpVersionResolver {

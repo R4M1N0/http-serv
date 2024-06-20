@@ -1,4 +1,4 @@
-package de.reqbal.httpserv.http;
+package de.reqbal.httpserv.http.model;
 
 import java.util.Map;
 

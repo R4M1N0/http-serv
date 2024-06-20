@@ -1,5 +1,6 @@
-package de.reqbal.httpserv.http;
+package de.reqbal.httpserv.http.request;
 
+import de.reqbal.httpserv.http.HttpVersionResolver;
 import java.io.BufferedReader;
 import java.io.IOException;
 
