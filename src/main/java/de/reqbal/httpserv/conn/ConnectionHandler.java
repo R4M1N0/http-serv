@@ -1,5 +1,8 @@
 package de.reqbal.httpserv.conn;
 
+import de.reqbal.httpserv.context.annotation.Inject;
+import de.reqbal.httpserv.context.annotation.Qualifier;
+import de.reqbal.httpserv.context.annotation.WebInfrastructure;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -10,6 +13,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+@WebInfrastructure
 public class ConnectionHandler {
 
   private final Integer port;
@@ -18,12 +22,15 @@ public class ConnectionHandler {
   private List<Socket> connections;
   private final ExecutorService serverTcpExecutor;
 
-  public ConnectionHandler(Integer port, ConnectionCommunicator connectionCommunicator) {
-    this.connectionCommunicator = connectionCommunicator;
+  @Inject
+  public ConnectionHandler(@Qualifier(name = "port") Integer port, ConnectionCommunicator connectionCommunicator) {
     this.port = port;
-    this.connections = Collections.synchronizedList(new ArrayList<>());
+    this.connectionCommunicator = connectionCommunicator;
+
     this.serverTcpExecutor = Executors.newSingleThreadExecutor();
+    this.connections = Collections.synchronizedList(new ArrayList<>());
   }
+
 
   public void start() throws IOException {
     try (ServerSocket serverSocket = new ServerSocket(port)) {
@@ -56,7 +63,6 @@ public class ConnectionHandler {
 
   private void handleClientSocket(Socket clientSocket) {
     connections.add(clientSocket);
-    System.out.println("Active socket count: " + connections.size());
     connectionCommunicator.serve(clientSocket);
     connections.remove(clientSocket);
     try {

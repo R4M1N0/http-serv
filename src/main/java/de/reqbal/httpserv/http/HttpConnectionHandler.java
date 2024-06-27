@@ -1,5 +1,7 @@
 package de.reqbal.httpserv.http;
 
+import de.reqbal.httpserv.context.annotation.Inject;
+import de.reqbal.httpserv.context.annotation.WebInfrastructure;
 import de.reqbal.httpserv.http.exception.HttpRequestInputException;
 import de.reqbal.httpserv.http.model.HttpCode;
 import de.reqbal.httpserv.http.request.HttpRequest;
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Optional;
 
+@WebInfrastructure
 public class HttpConnectionHandler {
   private final HttpRequestParseGateway httpRequestParseGateway;
   private final HttpResponseSerializer httpResponseSerializer;
@@ -22,13 +25,16 @@ public class HttpConnectionHandler {
   private final HttpStaticResourceLoader httpStaticResourceLoader;
   private final HttpResponseHeaderProvider httpResponseHeaderProvider;
 
-  public HttpConnectionHandler(HttpRequestParseGateway httpRequestParseGateway, RouteContainer routeContainer,
-                               HttpStaticResourceLoader httpStaticResourceLoader) {
+  @Inject
+  public HttpConnectionHandler(HttpRequestParseGateway httpRequestParseGateway,
+                               HttpResponseSerializer httpResponseSerializer, RouteContainer routeContainer,
+                               HttpStaticResourceLoader httpStaticResourceLoader,
+                               HttpResponseHeaderProvider httpResponseHeaderProvider) {
     this.httpRequestParseGateway = httpRequestParseGateway;
+    this.httpResponseSerializer = httpResponseSerializer;
     this.routeContainer = routeContainer;
     this.httpStaticResourceLoader = httpStaticResourceLoader;
-    this.httpResponseSerializer = new HttpResponseSerializer();
-    this.httpResponseHeaderProvider = new HttpResponseHeaderProvider();
+    this.httpResponseHeaderProvider = httpResponseHeaderProvider;
   }
 
   public void serve(BufferedReader in, PrintWriter out) throws IOException, InterruptedException {

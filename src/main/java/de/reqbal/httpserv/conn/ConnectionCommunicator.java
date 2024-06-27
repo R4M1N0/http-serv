@@ -1,5 +1,7 @@
 package de.reqbal.httpserv.conn;
 
+import de.reqbal.httpserv.context.annotation.Inject;
+import de.reqbal.httpserv.context.annotation.WebInfrastructure;
 import de.reqbal.httpserv.http.HttpConnectionHandler;
 import de.reqbal.httpserv.http.exception.HttpTimeoutException;
 import java.io.BufferedReader;
@@ -8,10 +10,12 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+@WebInfrastructure
 public class ConnectionCommunicator {
 
   private final HttpConnectionHandler httpConnectionHandler;
 
+  @Inject
   public ConnectionCommunicator(HttpConnectionHandler httpConnectionHandler) {
     this.httpConnectionHandler = httpConnectionHandler;
   }

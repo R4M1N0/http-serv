@@ -1,6 +1,9 @@
 package de.reqbal.httpserv.route;
 
 import de.reqbal.httpserv.context.WebContext;
+import de.reqbal.httpserv.context.annotation.Inject;
+import de.reqbal.httpserv.context.annotation.Qualifier;
+import de.reqbal.httpserv.context.annotation.WebInfrastructure;
 import de.reqbal.httpserv.http.model.HttpMethod;
 import de.reqbal.httpserv.http.request.HttpRequest;
 import de.reqbal.httpserv.route.annotation.Controller;
@@ -15,30 +18,31 @@ import java.util.List;
 import java.util.function.Function;
 import org.reflections.Reflections;
 
+@WebInfrastructure
 public class RouteDiscoveryProcessor {
 
   private static List<Class<? extends Annotation>> METHODS = List.of(GET.class, POST.class);
 
-  private final String basePackage;
+  private final String baseScanPackage;
 
   private final WebContext webContext;
 
-  public RouteDiscoveryProcessor(String basePackage) {
-    this.basePackage = basePackage;
+  @Inject
+  public RouteDiscoveryProcessor(@Qualifier(name = "baseScanPackage") String baseScanPackage) {
+    this.baseScanPackage = baseScanPackage;
     this.webContext = new WebContext();
   }
 
   public List<Route> getControllerRoutes() {
     List<Route> routes = new ArrayList<>();
 
-    Reflections reflections = new Reflections(basePackage);
+    Reflections reflections = new Reflections(baseScanPackage);
     var clazzes = reflections.getTypesAnnotatedWith(Controller.class);
     for (var clazz : clazzes) {
       try {
-        var instance = webContext.createGetInstance(clazz);
         var controller = clazz.getAnnotation(Controller.class);
+        var instance = createInstance(clazz, controller);
         var basePath = controller.path();
-
         var methods = clazz.getMethods();
         for (var method : methods) {
           var methodAnnotations = method.getDeclaredAnnotations();
@@ -58,6 +62,15 @@ public class RouteDiscoveryProcessor {
       }
     }
     return routes;
+  }
+
+  private Object createInstance(Class<?> clazz, Controller controller)
+      throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    var name = controller.name();
+    if (name.isBlank()) {
+      name = clazz.getName();
+    }
+    return webContext.createGetInstance(clazz, name);
   }
 
   private Route post(Object instance, String basePath, POST m, Method method) {

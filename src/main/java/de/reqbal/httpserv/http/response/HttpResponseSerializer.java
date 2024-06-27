@@ -1,11 +1,14 @@
 package de.reqbal.httpserv.http.response;
 
+import de.reqbal.httpserv.context.annotation.Inject;
+import de.reqbal.httpserv.context.annotation.WebInfrastructure;
 import de.reqbal.httpserv.http.model.HttpVersion;
 import de.reqbal.httpserv.http.resource.HttpBodySerializer;
 import de.reqbal.httpserv.http.resource.HttpResource;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
+@WebInfrastructure
 public class HttpResponseSerializer {
 
   public static final String SINGLE_SPACE = " ";
@@ -13,8 +16,9 @@ public class HttpResponseSerializer {
 
   private final HttpBodySerializer httpBodySerializer;
 
-  public HttpResponseSerializer() {
-    this.httpBodySerializer = new HttpBodySerializer();
+  @Inject
+  public HttpResponseSerializer(HttpBodySerializer httpBodySerializer) {
+    this.httpBodySerializer = httpBodySerializer;
   }
 
   public String serialize(HttpResponse httpResponse) {

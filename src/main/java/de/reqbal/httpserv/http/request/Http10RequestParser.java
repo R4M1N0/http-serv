@@ -2,6 +2,7 @@ package de.reqbal.httpserv.http.request;
 
 import static de.reqbal.httpserv.http.response.HttpResponseSerializer.SINGLE_SPACE;
 
+import de.reqbal.httpserv.context.annotation.WebInfrastructure;
 import de.reqbal.httpserv.http.model.HttpHeader;
 import de.reqbal.httpserv.http.model.HttpMethod;
 import java.io.BufferedReader;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@WebInfrastructure
 public class Http10RequestParser {
 
   public HttpRequest parse(String requestLine, BufferedReader remaining) throws IOException {

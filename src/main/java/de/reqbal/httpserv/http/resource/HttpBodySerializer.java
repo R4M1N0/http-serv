@@ -1,5 +1,6 @@
 package de.reqbal.httpserv.http.resource;
 
+import de.reqbal.httpserv.context.annotation.WebInfrastructure;
 import java.io.IOException;
 import java.io.SequenceInputStream;
 import java.io.ByteArrayInputStream;
@@ -8,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@WebInfrastructure
 public class HttpBodySerializer {
 
   public byte[] serialize(Object body) {

@@ -1,6 +1,6 @@
 package de.reqbal.service;
 
-import de.reqbal.httpserv.HttpServer;
+import de.reqbal.httpserv.context.WebInfrastructureContext;
 
 /**
  * Hello world!
@@ -10,11 +10,6 @@ public class App
 {
 
     public static void main(String[] args ) {
-
-        var serv = HttpServer.builder()
-            .withPort(8080)
-            .discoverRoutes("de.reqbal.service")
-            .build();
-        serv.run();
+        WebInfrastructureContext.run("de.reqbal.service");
     }
 }

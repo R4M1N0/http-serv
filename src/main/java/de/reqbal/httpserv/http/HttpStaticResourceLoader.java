@@ -1,5 +1,8 @@
 package de.reqbal.httpserv.http;
 
+import de.reqbal.httpserv.context.annotation.Inject;
+import de.reqbal.httpserv.context.annotation.Qualifier;
+import de.reqbal.httpserv.context.annotation.WebInfrastructure;
 import de.reqbal.httpserv.http.resource.HttpResource;
 import de.reqbal.httpserv.http.resource.HttpResourceImpl;
 import java.io.BufferedInputStream;
@@ -9,11 +12,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLConnection;
 
+@WebInfrastructure
 public class HttpStaticResourceLoader {
 
   private final String basePath;
 
-  public HttpStaticResourceLoader(String basePath) {
+  @Inject
+  public HttpStaticResourceLoader(@Qualifier(name = "basePath") String basePath) {
     this.basePath = basePath;
   }
 

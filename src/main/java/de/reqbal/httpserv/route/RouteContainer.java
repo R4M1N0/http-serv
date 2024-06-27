@@ -1,17 +1,23 @@
 package de.reqbal.httpserv.route;
 
+import de.reqbal.httpserv.context.annotation.Inject;
+import de.reqbal.httpserv.context.annotation.Qualifier;
+import de.reqbal.httpserv.context.annotation.WebInfrastructure;
 import de.reqbal.httpserv.http.model.HttpMethod;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@WebInfrastructure
 public class RouteContainer {
 
   private final List<Route> routes;
   private final RouteDiscoveryProcessor routeDiscoveryProcessor;
 
-  public RouteContainer(boolean autodiscoverRoutes, String baseScanPackage) {
-    this.routeDiscoveryProcessor = new RouteDiscoveryProcessor(baseScanPackage);
+  @Inject
+  public RouteContainer(@Qualifier(name = "autodiscoverRoutes") boolean autodiscoverRoutes,
+                        RouteDiscoveryProcessor routeDiscoveryProcessor) {
+    this.routeDiscoveryProcessor = routeDiscoveryProcessor;
     this.routes = new ArrayList<>();
     if (autodiscoverRoutes) {
       this.routes.addAll(getDiscoveredRoutes());

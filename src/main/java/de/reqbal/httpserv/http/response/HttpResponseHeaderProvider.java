@@ -1,5 +1,6 @@
 package de.reqbal.httpserv.http.response;
 
+import de.reqbal.httpserv.context.annotation.WebInfrastructure;
 import de.reqbal.httpserv.http.model.HttpHeader;
 import de.reqbal.httpserv.http.resource.HttpResource;
 import java.time.OffsetDateTime;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@WebInfrastructure
 public class HttpResponseHeaderProvider {
 
   private final String serverName;
@@ -19,7 +21,7 @@ public class HttpResponseHeaderProvider {
 
   public List<HttpHeader> getDefaultHeaders() {
     return new ArrayList<>(List.of(
-        new HttpHeader("Server", "http-serv"),
+        new HttpHeader("Server", serverName),
         new HttpHeader("Date", DateTimeFormatter.RFC_1123_DATE_TIME.format(OffsetDateTime.now()))
     ));
   }

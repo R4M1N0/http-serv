@@ -1,8 +1,10 @@
 package de.reqbal.httpserv.http;
 
+import de.reqbal.httpserv.context.annotation.WebInfrastructure;
 import de.reqbal.httpserv.http.model.HttpVersion;
 import java.util.Arrays;
 
+@WebInfrastructure
 public class HttpVersionResolver {
 
   public static HttpVersion resolve(String requestLine) {
