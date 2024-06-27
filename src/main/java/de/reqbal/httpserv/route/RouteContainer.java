@@ -8,9 +8,18 @@ import java.util.Optional;
 public class RouteContainer {
 
   private final List<Route> routes;
+  private final RouteDiscoveryProcessor routeDiscoveryProcessor;
 
-  public RouteContainer() {
+  public RouteContainer(boolean autodiscoverRoutes, String baseScanPackage) {
+    this.routeDiscoveryProcessor = new RouteDiscoveryProcessor(baseScanPackage);
     this.routes = new ArrayList<>();
+    if (autodiscoverRoutes) {
+      this.routes.addAll(getDiscoveredRoutes());
+    }
+  }
+
+  private List<Route> getDiscoveredRoutes() {
+    return routeDiscoveryProcessor.getControllerRoutes();
   }
 
   public RouteContainer withRoute(Route route) {
@@ -19,7 +28,9 @@ public class RouteContainer {
   }
 
   public RouteContainer withRoutes(List<Route> route) {
-    this.routes.addAll(route);
+    if (route != null) {
+      this.routes.addAll(route);
+    }
     return this;
   }
 

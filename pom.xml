@@ -16,6 +16,12 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.reflections</groupId>
+      <artifactId>reflections</artifactId>
+      <version>0.10.2</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
       <version>5.8.1</version>
@@ -47,7 +53,7 @@
               <archive>
                 <manifest>
                   <mainClass>
-                    de.reqbal.httpserv.App
+                    de.reqbal.service.App
                   </mainClass>
                 </manifest>
               </archive>

@@ -8,45 +8,50 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class ConnectionHandler {
 
   private final Integer port;
   private final ConnectionCommunicator connectionCommunicator;
-  private final Integer maxConnection;
 
   private List<Socket> connections;
-  private boolean running;
+  private final ExecutorService serverTcpExecutor;
 
-  public ConnectionHandler(Integer port, ConnectionCommunicator connectionCommunicator, Integer maxConnection) {
+  public ConnectionHandler(Integer port, ConnectionCommunicator connectionCommunicator) {
     this.connectionCommunicator = connectionCommunicator;
     this.port = port;
-    this.maxConnection = maxConnection;
     this.connections = Collections.synchronizedList(new ArrayList<>());
-    this.running = true;
+    this.serverTcpExecutor = Executors.newSingleThreadExecutor();
   }
 
   public void start() throws IOException {
     try (ServerSocket serverSocket = new ServerSocket(port)) {
-      try (ExecutorService executorService = Executors.newSingleThreadExecutor()) {
-        executorService.execute(() -> {
+      try (serverTcpExecutor) {
+        serverTcpExecutor
+            .execute(() -> {
           acceptConnections(serverSocket);
         });
       }
     }
   }
 
+  public void stop() throws InterruptedException {
+    serverTcpExecutor.awaitTermination(2, TimeUnit.SECONDS);
+  }
+
   private void acceptConnections(ServerSocket serverSocket) {
     try (ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()) {
-      while (running) {
-        try {
+      try {
+        while (true) {
           Socket clientSocket = serverSocket.accept();
           executorService.execute(() -> handleClientSocket(clientSocket));
-        } catch (IOException e) {
-          throw new RuntimeException(e);
         }
+      } catch (IOException e) {
+        throw new RuntimeException(e);
       }
     }
+
   }
 
   private void handleClientSocket(Socket clientSocket) {
